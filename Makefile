@@ -28,4 +28,9 @@ run: all
 clean:
 	@rm -rf $(OBJ_DIR) $(BUILD_DIR)
 
-.PHONY: all run clean
+push:
+	@git add .
+	@git commit -m "."
+	@git push -u origin main
+
+.PHONY: all run clean push
