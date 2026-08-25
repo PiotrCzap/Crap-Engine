@@ -17,14 +17,23 @@ struct sprite_renderer
     Color color;
 };
 
+struct text_renderer
+{
+    char *text;
+    float font_size;
+    Color Color;
+};
+
 
 struct GameObject
 {
    struct transform transform;
    struct sprite_renderer sprite_renderer;
+   struct text_renderer text_renderer;
 };
 
 struct GameObject player;
+struct GameObject test_text;
 
 // FUNKCJA RYSUJĄCA KWADRAT/PROSTOKĄT
 /**
@@ -113,7 +122,14 @@ int main(void)
             player.transform.size_x = 50;
             player.transform.size_y = 50;
 
-            Engine_draw_rectangle_shape(player.transform.pos_x, player.transform.pos_y, player.transform.size_x = 50, player.transform.size_y = 50, player.sprite_renderer.color = RED);
+            test_text.text_renderer.text = "hello world!";
+            test_text.text_renderer.font_size = 32;
+            test_text.text_renderer.Color = GREEN;
+            test_text.transform.pos_x = 10;
+            test_text.transform.pos_y = 10;
+
+            Engine_draw_rectangle_shape(player.transform.pos_x, player.transform.pos_y, player.transform.size_x, player.transform.size_y, player.sprite_renderer.color);
+            Engine_draw_text(test_text.text_renderer.text, test_text.transform.pos_x, test_text.transform.pos_y, test_text.text_renderer.font_size, test_text.text_renderer.Color);
 
         EndDrawing();
     }
