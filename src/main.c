@@ -5,12 +5,15 @@ const char ENGINE_NAME[13] = "Crap Engine";
 int window_size_x = 800;
 int window_size_y = 600;
 float FPS = 60;
+struct transform
+{
+    float pos_x, pos_y;
+    float size_x, size_y;
+};
+
 struct GameObject
 {
-   float pos_x;
-   float pos_y;
-   float size_x;
-   float size_y;
+   struct transform transform;
    Color color;
 };
 struct GameObject player;
@@ -97,12 +100,12 @@ int main(void)
             // Engine_draw_rectangle_shape(350, 320, 50, 70, PINK);
 
             player.color = RED;
-            player.pos_x = 300;
-            player.pos_y = 300;
-            player.size_x = 50;
-            player.size_y = 50;
+            player.transform.pos_x = 300;
+            player.transform.pos_y = 300;
+            player.transform.size_x = 50;
+            player.transform.size_y = 50;
 
-            Engine_draw_rectangle_shape(player.pos_x, player.pos_y, player.size_x, player.size_y, player.color);
+            Engine_draw_rectangle_shape(player.transform.pos_x, player.transform.pos_y, player.transform.size_x = 50, player.transform.size_y = 50, player.color);
 
         EndDrawing();
     }
