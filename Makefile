@@ -8,7 +8,7 @@ BUILD_DIR = build
 
 SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
-TARGET = $(BUILD_DIR)/engine
+TARGET = $(BUILD_DIR)/Crap-Engine
 
 all: $(TARGET)
 

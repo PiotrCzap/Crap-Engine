@@ -1,38 +1,11 @@
 #include "raylib.h"
 #include <stdio.h>
+#include "main.h"
 
 const char ENGINE_NAME[13] = "Crap Engine";
 int window_size_x = 800;
 int window_size_y = 600;
 float FPS = 60;
-
-struct transform
-{
-    float pos_x, pos_y;
-    float size_x, size_y;
-};
-
-struct sprite_renderer
-{
-    Color color;
-    int visible;
-};
-
-struct text_renderer
-{
-    char *text;
-    float font_size;
-    Color color;
-    int visible;
-};
-
-
-struct GameObject
-{
-   struct transform transform;
-   struct sprite_renderer sprite_renderer;
-   struct text_renderer text_renderer;
-};
 
 struct GameObject player;
 struct GameObject test_text;
@@ -103,10 +76,13 @@ int main(void)
 {
     InitWindow(window_size_x, window_size_y, ENGINE_NAME);
     SetTargetFPS(FPS);
-    print_fps();
 
     while (!WindowShouldClose())
     {
+        if (10 % 10 == 0)
+        {
+            print_fps();
+        }
 
         BeginDrawing();
             ClearBackground(BLACK);
