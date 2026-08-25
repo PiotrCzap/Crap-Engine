@@ -5,17 +5,25 @@ const char ENGINE_NAME[13] = "Crap Engine";
 int window_size_x = 800;
 int window_size_y = 600;
 float FPS = 60;
+
 struct transform
 {
     float pos_x, pos_y;
     float size_x, size_y;
 };
 
+struct sprite_renderer
+{
+    Color color;
+};
+
+
 struct GameObject
 {
    struct transform transform;
-   Color color;
+   struct sprite_renderer sprite_renderer;
 };
+
 struct GameObject player;
 
 // FUNKCJA RYSUJĄCA KWADRAT/PROSTOKĄT
@@ -99,13 +107,13 @@ int main(void)
             // Engine_draw_rectangle_shape(300, 300, 50, 50, BLUE);
             // Engine_draw_rectangle_shape(350, 320, 50, 70, PINK);
 
-            player.color = RED;
+            player.sprite_renderer.color = RED;
             player.transform.pos_x = 300;
             player.transform.pos_y = 300;
             player.transform.size_x = 50;
             player.transform.size_y = 50;
 
-            Engine_draw_rectangle_shape(player.transform.pos_x, player.transform.pos_y, player.transform.size_x = 50, player.transform.size_y = 50, player.color);
+            Engine_draw_rectangle_shape(player.transform.pos_x, player.transform.pos_y, player.transform.size_x = 50, player.transform.size_y = 50, player.sprite_renderer.color = RED);
 
         EndDrawing();
     }
