@@ -111,12 +111,6 @@ int main(void)
         BeginDrawing();
             ClearBackground(BLACK);
 
-            // Engine_draw_text("test", 200, 100, 50, RED);
-            // Engine_draw_circle_shape(100, 100, 50, RED);
-            // Engine_draw_ellipse_shape(200, 200, 150, 50, YELLOW);
-            // Engine_draw_rectangle_shape(300, 300, 50, 50, BLUE);
-            // Engine_draw_rectangle_shape(350, 320, 50, 70, PINK);
-
             player.sprite_renderer.color = RED;
             player.transform.pos_x = 300;
             player.transform.pos_y = 300;
@@ -152,7 +146,7 @@ int main(void)
                     player.sprite_renderer.color
                 );
             }
-            
+
         EndDrawing();
     }
     
