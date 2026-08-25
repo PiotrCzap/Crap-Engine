@@ -30,7 +30,7 @@ clean:
 
 push:
 	@git add .
-	@git commit -m "."
+	@git commit -m "$(m)"
 	@git push -u origin main
 
 .PHONY: all run clean push
