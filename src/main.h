@@ -11,6 +11,7 @@ struct transform
 
 struct sprite_renderer
 {
+    Texture texture;
     Color color;
     int visible;
 };

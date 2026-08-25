@@ -76,6 +76,7 @@ int main(void)
 {
     InitWindow(window_size_x, window_size_y, ENGINE_NAME);
     SetTargetFPS(FPS);
+    
 
     while (!WindowShouldClose())
     {
@@ -125,6 +126,5 @@ int main(void)
 
         EndDrawing();
     }
-    
     CloseWindow();
 }
