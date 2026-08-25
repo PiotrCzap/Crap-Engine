@@ -6,20 +6,6 @@ int window_size_x = 800;
 int window_size_y = 600;
 float FPS = 60;
 
-void input(void)
-{
-    
-}
-
-static inline void Engine_draw_shape(const int shape_type, const float radius_only_for_circle, const float radius_x, const float radius_y, const float pos_x, const float pos_y, const float size_x, const float size_y, const Color color)
-{
-    switch (shape_type)
-    {
-    case 2: 
-    default: break;
-    }
-}
-
 // FUNKCJA RYSUJĄCA KWADRAT/PROSTOKĄT
 /**
  * @brief PARAMETRY FUNKCJI "Engine_draw_rectangle_shape"
@@ -90,7 +76,6 @@ int main(void)
     while (!WindowShouldClose())
     {
         
-        input();
         print_fps();
 
         BeginDrawing();
