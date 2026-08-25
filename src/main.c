@@ -15,13 +15,15 @@ struct transform
 struct sprite_renderer
 {
     Color color;
+    int visible;
 };
 
 struct text_renderer
 {
     char *text;
     float font_size;
-    Color Color;
+    Color color;
+    int visible;
 };
 
 
@@ -101,11 +103,10 @@ int main(void)
 {
     InitWindow(window_size_x, window_size_y, ENGINE_NAME);
     SetTargetFPS(FPS);
+    print_fps();
 
     while (!WindowShouldClose())
     {
-        
-        print_fps();
 
         BeginDrawing();
             ClearBackground(BLACK);
@@ -119,18 +120,39 @@ int main(void)
             player.sprite_renderer.color = RED;
             player.transform.pos_x = 300;
             player.transform.pos_y = 300;
-            player.transform.size_x = 50;
-            player.transform.size_y = 50;
+            player.transform.size_x = 100;
+            player.transform.size_y = 100;
+            player.sprite_renderer.visible = 0;
 
             test_text.text_renderer.text = "hello world!";
-            test_text.text_renderer.font_size = 32;
-            test_text.text_renderer.Color = GREEN;
+            test_text.text_renderer.font_size = 64;
+            test_text.text_renderer.color = GREEN;
             test_text.transform.pos_x = 10;
             test_text.transform.pos_y = 10;
+            test_text.text_renderer.visible = 0;
 
-            Engine_draw_rectangle_shape(player.transform.pos_x, player.transform.pos_y, player.transform.size_x, player.transform.size_y, player.sprite_renderer.color);
-            Engine_draw_text(test_text.text_renderer.text, test_text.transform.pos_x, test_text.transform.pos_y, test_text.text_renderer.font_size, test_text.text_renderer.Color);
-
+            if (test_text.text_renderer.visible == 1)
+            {
+                Engine_draw_text(
+                    test_text.text_renderer.text, 
+                    test_text.transform.pos_x, 
+                    test_text.transform.pos_y, 
+                    test_text.text_renderer.font_size, 
+                    test_text.text_renderer.color
+                );
+            }
+            
+            if (player.sprite_renderer.visible == 1)
+            {
+                Engine_draw_rectangle_shape(
+                    player.transform.pos_x,
+                    player.transform.pos_y,
+                    player.transform.size_x,
+                    player.transform.size_y,
+                    player.sprite_renderer.color
+                );
+            }
+            
         EndDrawing();
     }
     
