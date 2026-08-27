@@ -3,6 +3,8 @@
 
 #include "raylib.h"
 
+char null_txt[26] = "src/Engine Data/null.png";
+
 struct transform
 {
     float pos_x, pos_y;
@@ -11,7 +13,7 @@ struct transform
 
 struct sprite_renderer
 {
-    Texture texture;
+    Texture2D texture;
     Color color;
     int visible;
 };

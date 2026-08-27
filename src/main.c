@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include "main.h"
 
 const char ENGINE_NAME[13] = "Crap Engine";
@@ -9,6 +10,17 @@ float FPS = 60;
 
 struct GameObject player;
 struct GameObject test_text;
+
+// =================================================================================================
+// Funkcje z Teksturami
+// =================================================================================================
+
+
+
+// =================================================================================================
+// Standardowe Funkcje
+// =================================================================================================
+
 
 // FUNKCJA RYSUJĄCA KWADRAT/PROSTOKĄT
 /**
@@ -64,6 +76,10 @@ static inline void Engine_draw_text(const char text[], const float pos_x, const 
 {
     DrawText(text, pos_x, pos_y, font_size, color);
 }
+
+// =================================================================================================
+//
+// =================================================================================================
 
 // FUNKCJA PRINTUJĄCA FPSY W KONSOLI
 void print_fps(void)
