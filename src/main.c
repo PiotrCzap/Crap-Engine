@@ -111,52 +111,44 @@ int main(void)
     SetTargetFPS(FPS);
     Engine_texture_loader();
     
+    player.sprite_renderer.color = RED;
+    player.transform.pos_x = 300;
+    player.transform.pos_y = 300;
+    player.transform.size_x = 100;
+    player.transform.size_y = 100;
+    player.sprite_renderer.visible = 1;
+    
+    test_text.text_renderer.text = "hello world!";
+    test_text.text_renderer.font_size = 64;
+    test_text.text_renderer.color = GREEN;
+    test_text.transform.pos_x = 10;
+    test_text.transform.pos_y = 10;
+    test_text.text_renderer.visible = 1;
 
     while (!WindowShouldClose())
     {
+        // ==========================================
+        // UPDATE
+        // ==========================================
+
         if (10 % 10 == 0)
         {
             print_fps();
         }
 
+        // ==========================================
+        // RENDER
+        // ==========================================
         BeginDrawing();
             ClearBackground(BLACK);
             Engine_draw_rectangle_shape_with_texture(null_txt, 100, 100, 100, 100, 0, WHITE);
-
-            player.sprite_renderer.color = RED;
-            player.transform.pos_x = 300;
-            player.transform.pos_y = 300;
-            player.transform.size_x = 100;
-            player.transform.size_y = 100;
-            player.sprite_renderer.visible = 1;
-
-            test_text.text_renderer.text = "hello world!";
-            test_text.text_renderer.font_size = 64;
-            test_text.text_renderer.color = GREEN;
-            test_text.transform.pos_x = 10;
-            test_text.transform.pos_y = 10;
-            test_text.text_renderer.visible = 1;
-
             if (test_text.text_renderer.visible == 1)
             {
-                Engine_draw_text(
-                    test_text.text_renderer.text, 
-                    test_text.transform.pos_x, 
-                    test_text.transform.pos_y, 
-                    test_text.text_renderer.font_size, 
-                    test_text.text_renderer.color
-                );
+                Engine_draw_text(test_text.text_renderer.text, test_text.transform.pos_x, test_text.transform.pos_y, test_text.text_renderer.font_size, test_text.text_renderer.color);
             }
-            
             if (player.sprite_renderer.visible == 1)
             {
-                Engine_draw_rectangle_shape(
-                    player.transform.pos_x,
-                    player.transform.pos_y,
-                    player.transform.size_x,
-                    player.transform.size_y,
-                    player.sprite_renderer.color
-                );
+                Engine_draw_rectangle_shape(player.transform.pos_x, player.transform.pos_y, player.transform.size_x, player.transform.size_y, player.sprite_renderer.color);
             }
 
         EndDrawing();
