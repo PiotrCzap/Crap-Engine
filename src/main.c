@@ -2,15 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "main.h"
+#include "time.h"
+#include <unistd.h>
 
 const char ENGINE_NAME[13] = "Crap Engine";
 char ENGINE_VERSION[16] = "Version: 0.0.1";
 int window_size_x = 800;
 int window_size_y = 600;
 float FPS = 60.0f;
-Color GRAY_COLOR = { 40, 40, 40, 255 };
-Color DARK_GRAY_COLOR = { 30, 30, 30, 255 };
-Color LIGHT_GRAY_COLOR = { 70, 70, 70, 255 };
+Color LIGHT_GRAY_COLOR = { 60, 60, 60, 255 };
+Color GRAY_COLOR = { 50, 50, 50, 255 };
+Color DARK_GRAY_COLOR = { 40, 40, 40, 255 };
+Color DARKER_GRAY_COLOR = { 30, 30, 30, 255 };
 
 Font font;
 
@@ -24,12 +27,45 @@ static inline void Engine_draw_text_better(const Font font, const char text[], c
 // Funkcje z GUI
 // =================================================================================================
 
+static inline void Engine_button()
+{
+    Vector2 mouse_pos = GetMousePosition();
+    Rectangle button = { 10, 60, 230, 40 };
+    
+    Color button_color_normal = LIGHT_GRAY_COLOR;
+    Color button_color_hovered = GRAY_COLOR;
+    Color button_color_clicked = DARKER_GRAY_COLOR;
+    Color button_current_color = button_color_normal;
+
+    if (CheckCollisionPointRec(mouse_pos, button))
+    {
+        button_current_color = button_color_hovered;
+
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+        {
+            button_current_color = button_color_clicked;
+            sleep(0.1);
+        }
+    }
+    else
+    {
+        button_current_color = button_color_normal;
+    }
+    
+    
+
+    DrawRectangleRec(button, button_current_color);
+    
+    Engine_draw_text_better(font, "PROJECTS", (Vector2){50.0f, 70.0f}, (Vector2){0.0f, 0.0f}, 0.0f, 24.0f, 2.0f, WHITE);
+}
+
 static inline void Project_window()
 {
     Engine_draw_rectangle_shape(0, 0, 800, 600, GRAY_COLOR);
     Engine_draw_rectangle_shape(0, 0, 256, 600, DARK_GRAY_COLOR);
     Engine_draw_text_better(font, ENGINE_NAME, (Vector2){10.0f, 10.0f}, (Vector2){0.0f, 0.0f}, 0.0f, 32.0f, 2.0f, WHITE);
     Engine_draw_text_better(font, ENGINE_VERSION, (Vector2){10.0f, 580.0f}, (Vector2){0.0f, 0.0f}, 0.0f, 16.0f, 2.0f, WHITE);
+    Engine_button();
     
 }
 
