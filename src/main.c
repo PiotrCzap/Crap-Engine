@@ -22,6 +22,11 @@ static inline void Engine_texture_loader()
     null_txt = LoadTexture("src/Engine Data/null.png");
 }
 
+static inline void Engine_texture_unloader()
+{
+    UnloadTexture(null_txt);
+}
+
 static inline void Engine_draw_rectangle_shape_with_texture(const Texture2D texture, const float pos_x, const float pos_y, const float size_x, const float size_y, float rotation, const Color color)
 {
     Rectangle sourceRec = { 0.0f, 0.0f, (float)texture.width, (float)texture.height };
@@ -139,6 +144,7 @@ int main(void)
         // ==========================================
         // RENDER
         // ==========================================
+
         BeginDrawing();
             ClearBackground(BLACK);
             Engine_draw_rectangle_shape_with_texture(null_txt, 100, 100, 100, 100, 0, WHITE);
@@ -153,6 +159,6 @@ int main(void)
 
         EndDrawing();
     }
-    UnloadTexture(null_txt);
+    Engine_texture_unloader();
     CloseWindow();
 }
