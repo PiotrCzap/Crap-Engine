@@ -3,7 +3,7 @@
 
 #include "raylib.h"
 
-char null_txt[26] = "src/Engine Data/null.png";
+extern Texture2D null_txt;
 
 struct transform
 {

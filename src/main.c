@@ -6,7 +6,7 @@
 const char ENGINE_NAME[13] = "Crap Engine";
 int window_size_x = 800;
 int window_size_y = 600;
-float FPS = 60;
+float FPS = 60.0f;
 
 struct GameObject player;
 struct GameObject test_text;
@@ -15,7 +15,21 @@ struct GameObject test_text;
 // Funkcje z Teksturami
 // =================================================================================================
 
+Texture2D null_txt;
 
+static inline void Engine_texture_loader()
+{
+    null_txt = LoadTexture("src/Engine Data/null.png");
+}
+
+static inline void Engine_draw_rectangle_shape_with_texture(const Texture2D texture, const float pos_x, const float pos_y, const float size_x, const float size_y, float rotation, const Color color)
+{
+    Rectangle sourceRec = { 0.0f, 0.0f, (float)texture.width, (float)texture.height };
+    Rectangle destRec = { pos_x, pos_y, size_x, size_y };
+    Vector2 origin = { 0.0f, 0.0f };
+    
+    DrawTexturePro(texture, sourceRec, destRec, origin, rotation, color);
+}
 
 // =================================================================================================
 // Standardowe Funkcje
@@ -87,11 +101,15 @@ void print_fps(void)
     printf("FPS: %d\n", GetFPS());
 }
 
+// =================================================================================================
 // FUNKCJA GŁÓWNA
+// =================================================================================================
+
 int main(void)
 {
     InitWindow(window_size_x, window_size_y, ENGINE_NAME);
     SetTargetFPS(FPS);
+    Engine_texture_loader();
     
 
     while (!WindowShouldClose())
@@ -103,20 +121,21 @@ int main(void)
 
         BeginDrawing();
             ClearBackground(BLACK);
+            Engine_draw_rectangle_shape_with_texture(null_txt, 100, 100, 100, 100, 0, WHITE);
 
             player.sprite_renderer.color = RED;
             player.transform.pos_x = 300;
             player.transform.pos_y = 300;
             player.transform.size_x = 100;
             player.transform.size_y = 100;
-            player.sprite_renderer.visible = 0;
+            player.sprite_renderer.visible = 1;
 
             test_text.text_renderer.text = "hello world!";
             test_text.text_renderer.font_size = 64;
             test_text.text_renderer.color = GREEN;
             test_text.transform.pos_x = 10;
             test_text.transform.pos_y = 10;
-            test_text.text_renderer.visible = 0;
+            test_text.text_renderer.visible = 1;
 
             if (test_text.text_renderer.visible == 1)
             {
@@ -142,5 +161,6 @@ int main(void)
 
         EndDrawing();
     }
+    UnloadTexture(null_txt);
     CloseWindow();
 }
