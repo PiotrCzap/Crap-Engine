@@ -4,12 +4,37 @@
 #include "main.h"
 
 const char ENGINE_NAME[13] = "Crap Engine";
+char ENGINE_VERSION[16] = "Version: 0.0.1";
 int window_size_x = 800;
 int window_size_y = 600;
 float FPS = 60.0f;
+Color GRAY_COLOR = { 43, 43, 43, 255 }; // R, G, B, Alpha (przezroczystość)
+Color DARK_GRAY_COLOR = { 30, 30, 30, 255 }; // R, G, B, Alpha (przezroczystość
+
+Font font;
 
 struct GameObject player;
 struct GameObject test_text;
+
+static inline void Engine_draw_rectangle_shape(const float pos_x, const float pos_y, const float size_x, const float size_y, const Color color);
+
+// =================================================================================================
+// Funkcje z GUI
+// =================================================================================================
+
+static inline void Project_window()
+{
+    Engine_draw_rectangle_shape(0, 0, 800, 600, GRAY_COLOR);
+    Engine_draw_rectangle_shape(0, 0, 256, 600, DARK_GRAY_COLOR);
+
+    Vector2 crap_engine_text_position = { 10.0f, 10.0f };
+    Vector2 crap_engine_text_origin = { 0.0f, 0.0f };
+    DrawTextPro(font, ENGINE_NAME, crap_engine_text_position, crap_engine_text_origin, 0.0f, 32.0f, 2.0f, WHITE);
+
+    Vector2 crap_engine_version_text_position = { 10.0f, 580.0f };
+    Vector2 crap_engine_version_text_origin = { 0.0f, 0.0f };
+    DrawTextPro(font, ENGINE_VERSION, crap_engine_version_text_position, crap_engine_version_text_origin, 0.0f, 16.0f, 2.0f, WHITE);
+}
 
 // =================================================================================================
 // Funkcje z Teksturami
@@ -115,23 +140,9 @@ int main(void)
     InitWindow(window_size_x, window_size_y, ENGINE_NAME);
     SetTargetFPS(FPS);
     Engine_texture_loader();
-    
-    player.sprite_renderer.color = RED;
-    player.transform.pos_x = 300;
-    player.transform.pos_y = 300;
-    player.transform.size_x = 100;
-    player.transform.size_y = 100;
-    player.sprite_renderer.visible = 1;
-    
-    test_text.text_renderer.text = "hello world!";
-    test_text.text_renderer.font_size = 64;
-    test_text.text_renderer.color = GREEN;
-    test_text.transform.pos_x = 10;
-    test_text.transform.pos_y = 10;
-    test_text.text_renderer.visible = 1;
 
-    while (!WindowShouldClose())
-    {
+while (!WindowShouldClose())
+{
         // ==========================================
         // UPDATE
         // ==========================================
@@ -147,18 +158,11 @@ int main(void)
 
         BeginDrawing();
             ClearBackground(BLACK);
-            Engine_draw_rectangle_shape_with_texture(null_txt, 100, 100, 100, 100, 0, WHITE);
-            if (test_text.text_renderer.visible == 1)
-            {
-                Engine_draw_text(test_text.text_renderer.text, test_text.transform.pos_x, test_text.transform.pos_y, test_text.text_renderer.font_size, test_text.text_renderer.color);
-            }
-            if (player.sprite_renderer.visible == 1)
-            {
-                Engine_draw_rectangle_shape(player.transform.pos_x, player.transform.pos_y, player.transform.size_x, player.transform.size_y, player.sprite_renderer.color);
-            }
+            Project_window();
 
         EndDrawing();
     }
     Engine_texture_unloader();
+    UnloadFont(font);
     CloseWindow();
 }
