@@ -1,24 +1,26 @@
-CC = gcc
-CFLAGS = -Wall -Wextra
+CXX = g++
+CXXFLAGS = -Wall -Wextra
 LIBS = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 
 SRC_DIR = src
 OBJ_DIR = .obj
 BUILD_DIR = build
 
-SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
-OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
+# Szukamy plików z rozszerzeniem .cpp zamiast .c
+SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
+OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
 TARGET = $(BUILD_DIR)/Crap-Engine
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	@mkdir -p $(BUILD_DIR)
-	$(CC) $(OBJS) -o $@ $(LIBS)
+	$(CXX) $(OBJS) -o $@ $(LIBS)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+# Reguła budowania dla plików .cpp i użycie zmiennej $(CXX)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 run: all
 	@clear

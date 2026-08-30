@@ -1,0 +1,69 @@
+#pragma once
+
+#include "raylib.h"
+
+// =================================================================================================
+// Zmienne
+// =================================================================================================
+
+extern int window_size_x;
+extern int window_size_y;
+extern const char* ENGINE_NAME;
+extern const char* ENGINE_VERSION;
+extern int FPS;
+
+extern int Projects_tab_visible;
+
+extern Color LIGHT_GRAY_COLOR;
+extern Color GRAY_COLOR;
+extern Color DARK_GRAY_COLOR;
+extern Color DARKER_GRAY_COLOR;
+
+extern Font font;
+
+inline Texture2D null_txt;
+
+typedef void (*ButtonAction)(void);
+
+
+void Engine_texture_loader(void);
+void Engine_texture_unloader(void);
+void Engine_draw_rectangle_shape(const float pos_x, const float pos_y, const float size_x, const float size_y, const Color color);
+void Engine_draw_circle_shape(const float pos_x, const float pos_y, const float radius, const Color color);
+void Engine_draw_ellipse_shape(const float pos_x, const float pos_y, const float radius_x, const float radius_y, const Color color);
+void Engine_draw_text(const char text[], const float pos_x, const float pos_y, const float font_size, const Color color);
+void Engine_draw_text_better(const Font font, const char text[], const Vector2 crap_engine_text_position, const Vector2 crap_engine_text_origin, const float rotation, const float font_size, const float spacing, const Color color);
+void Engine_draw_rectangle_shape_with_texture(const Texture2D texture, const float pos_x, const float pos_y, const float size_x, const float size_y, float rotation, const Color color);
+void Engine_button(ButtonAction action, const char text[], const float pos_x, const float pos_y, const float text_pos_x, const float text_pos_y, const float size_x, const float size_y);
+void print_fps(void);
+
+void Projects_tab();
+void Project_window(void);
+
+struct transform
+{
+    float pos_x, pos_y;
+    float size_x, size_y;
+};
+
+struct sprite_renderer
+{
+    Texture2D texture;
+    Color color;
+    int visible;
+};
+
+struct text_renderer
+{
+    char *text;
+    float font_size;
+    Color color;
+    int visible;
+};
+
+struct GameObject
+{
+   struct transform transform;
+   struct sprite_renderer sprite_renderer;
+   struct text_renderer text_renderer;
+};
