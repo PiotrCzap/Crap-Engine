@@ -7,6 +7,7 @@
 // =================================================================================================
 // Zmienne
 // =================================================================================================
+
 inline Image window_icon;
 extern int window_size_x;
 extern int window_size_y;
@@ -14,16 +15,22 @@ extern const char* ENGINE_NAME;
 extern const char* ENGINE_VERSION;
 extern int FPS;
 
-extern int Projects_tab_visible;
+// colors
 
 extern Color LIGHT_GRAY_COLOR;
 extern Color GRAY_COLOR;
 extern Color DARK_GRAY_COLOR;
 extern Color DARKER_GRAY_COLOR;
 
+// fonts
+
 extern Font font;
 
+// textures
+
 inline Texture2D null_txt;
+inline Texture2D projects_icon;
+inline Texture2D learn_icon;
 
 typedef void (*ButtonAction)(void);
 

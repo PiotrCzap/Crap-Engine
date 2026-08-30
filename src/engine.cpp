@@ -6,8 +6,6 @@ const char* ENGINE_NAME = "Moon Engine\0";
 const char* ENGINE_VERSION = "Version: 0.0.1\0";
 int FPS = 60;
 
-int Projects_tab_visible = 0;
-
 Color LIGHT_GRAY_COLOR = { 60, 60, 60, 255 };
 Color GRAY_COLOR = { 50, 50, 50, 255 };
 Color DARK_GRAY_COLOR = { 40, 40, 40, 255 };
@@ -65,10 +63,14 @@ void Engine_button(ButtonAction action, const char text[], const float pos_x, co
 void Engine_texture_loader(void)
 {
     null_txt = LoadTexture("src/Engine Data/null.png");
+    projects_icon = LoadTexture("src/Engine Data/projects icon.png");
+    learn_icon = LoadTexture("src/Engine Data/learn icon.png");
 }
 void Engine_texture_unloader(void)
 {
     UnloadTexture(null_txt);
+    UnloadTexture(projects_icon);
+    UnloadTexture(learn_icon);
 }
 
 // =================================================================================================

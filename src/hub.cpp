@@ -1,15 +1,21 @@
 #include "main.hpp"
 
+int tabs = 0;
+
 void Projects_tab()
 {
-    Projects_tab_visible = 1;
-    
+    tabs = 1;
+}
+
+void Learn_tab()
+{
+    tabs = 2;
 }
 
 void Project_window(void)
 {
-    Engine_draw_rectangle_shape(0, 0, 800, 600, GRAY_COLOR);
-    Engine_draw_rectangle_shape(0, 0, 256, 600, DARK_GRAY_COLOR);
+    Engine_draw_rectangle_shape(0.0f, 0.0f, 800.0f, 600.0f, GRAY_COLOR);
+    Engine_draw_rectangle_shape(0.0f, 0.0f, 256.0f, 600.0f, DARK_GRAY_COLOR);
 
     // texts
 
@@ -18,14 +24,21 @@ void Project_window(void)
 
     // Buttons
 
-    Engine_button(Projects_tab, "PROJECTS", 15.0f, 60.0f, 45.0f, 70.0f, 200.0f, 40.0f);
-    Engine_button(Projects_tab, "TUTORIALS", 15.0f, 120.0f, 45.0f, 130.0f, 200.0f, 40.0f);
-    Engine_button(Projects_tab, "LEARN", 15.0f, 180.0f, 45.0f, 190.0f, 200.0f, 40.0f);
+    Engine_button(Projects_tab, "PROJECTS", 15.0f, 60.0f, 70.0f, 70.0f, 200.0f, 40.0f);
+    Engine_button(Learn_tab, "LEARN", 15.0f, 120.0f, 60.0f, 130.0f, 200.0f, 40.0f);
+    Engine_draw_rectangle_shape_with_texture(projects_icon, 25.0f, 65.0f, 30.0f, 30.0f, 0.0f, WHITE);
+    Engine_draw_rectangle_shape_with_texture(learn_icon, 25.0f, 124.0f, 30.0f, 30.0f, 0.0f, WHITE);
+    
 
-    if (Projects_tab_visible == 1)
+    if (tabs == 1)
     {
-        Engine_draw_rectangle_shape(250, 0, 800, 600, DARKER_GRAY_COLOR);
-        Engine_draw_text_better(font, "PROJECTS", (Vector2){260, 10}, (Vector2){0.0f, 0.0f}, 0.0f, 32.0f, 2.0f, WHITE);
+        Engine_draw_rectangle_shape(250.0f, 0.0f, 800.0f, 600.0f, DARKER_GRAY_COLOR);
+        Engine_draw_text_better(font, "PROJECTS", (Vector2){260.0f, 10.0f}, (Vector2){0.0f, 0.0f}, 0.0f, 32.0f, 2.0f, WHITE);
+    }
+    if (tabs == 2)
+    {
+        Engine_draw_rectangle_shape(250.0f, 0.0f, 800.0f, 600.0f, DARKER_GRAY_COLOR);
+        Engine_draw_text_better(font, "LEARN", (Vector2){260.0f, 10.0f}, (Vector2){0.0f, 0.0f}, 0.0f, 32.0f, 2.0f, WHITE);
     }
     
 }
