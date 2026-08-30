@@ -1,11 +1,13 @@
 #pragma once
 
 #include "raylib.h"
+#include <stdio.h>
+#include <sys/resource.h>
 
 // =================================================================================================
 // Zmienne
 // =================================================================================================
-
+inline Image window_icon;
 extern int window_size_x;
 extern int window_size_y;
 extern const char* ENGINE_NAME;
@@ -32,7 +34,7 @@ void Engine_draw_rectangle_shape(const float pos_x, const float pos_y, const flo
 void Engine_draw_circle_shape(const float pos_x, const float pos_y, const float radius, const Color color);
 void Engine_draw_ellipse_shape(const float pos_x, const float pos_y, const float radius_x, const float radius_y, const Color color);
 void Engine_draw_text(const char text[], const float pos_x, const float pos_y, const float font_size, const Color color);
-void Engine_draw_text_better(const Font font, const char text[], const Vector2 crap_engine_text_position, const Vector2 crap_engine_text_origin, const float rotation, const float font_size, const float spacing, const Color color);
+void Engine_draw_text_better(const Font font, const char text[], const Vector2 text_position, const Vector2 text_origin, const float rotation, const float font_size, const float spacing, const Color color);
 void Engine_draw_rectangle_shape_with_texture(const Texture2D texture, const float pos_x, const float pos_y, const float size_x, const float size_y, float rotation, const Color color);
 void Engine_button(ButtonAction action, const char text[], const float pos_x, const float pos_y, const float text_pos_x, const float text_pos_y, const float size_x, const float size_y);
 void print_fps(void);

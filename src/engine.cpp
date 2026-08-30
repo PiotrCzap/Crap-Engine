@@ -1,9 +1,8 @@
-#include <stdio.h>
 #include "main.hpp"
 
 int window_size_x = 800;
 int window_size_y = 600;
-const char* ENGINE_NAME = "Crap Engine\0";
+const char* ENGINE_NAME = "Moon Engine\0";
 const char* ENGINE_VERSION = "Version: 0.0.1\0";
 int FPS = 60;
 
@@ -136,16 +135,16 @@ void Engine_draw_text(const char text[], const float pos_x, const float pos_y, c
  * @brief PARAMETRY FUNKCJI "draw text"
  * @param font czcionka tekstu
  * @param text wyświetlany tekst
- * @param crap_engine_text_position pozycja tekstu > przykład: (Vector2){x, y}
- * @param crap_engine_text_origin punkt centralny tekstu > przykład: (Vector2){x, y}
+ * @param text_position pozycja tekstu > przykład: (Vector2){x, y}
+ * @param text_origin punkt centralny tekstu > przykład: (Vector2){x, y}
  * @param rotation obrót tekstu
  * @param font_size wielkość tekstu
  * @param spacing odstępy między literami
  * @param color kolor tekstu
  */
-void Engine_draw_text_better(const Font font, const char text[], const Vector2 crap_engine_text_position, const Vector2 crap_engine_text_origin, const float rotation, const float font_size, const float spacing, const Color color)
+void Engine_draw_text_better(const Font font, const char text[], const Vector2 text_position, const Vector2 text_origin, const float rotation, const float font_size, const float spacing, const Color color)
 {
-    DrawTextPro(font, text, crap_engine_text_position, crap_engine_text_origin, rotation, font_size, spacing, color);
+    DrawTextPro(font, text, text_position, text_origin, rotation, font_size, spacing, color);
 }
 
 
