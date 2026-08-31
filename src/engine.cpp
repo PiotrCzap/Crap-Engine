@@ -65,12 +65,14 @@ void Engine_texture_loader(void)
     null_txt = LoadTexture("src/Engine Data/null.png");
     projects_icon = LoadTexture("src/Engine Data/projects icon.png");
     learn_icon = LoadTexture("src/Engine Data/learn icon.png");
+    settings_icon = LoadTexture("src/Engine Data/Settings.png");
 }
 void Engine_texture_unloader(void)
 {
     UnloadTexture(null_txt);
     UnloadTexture(projects_icon);
     UnloadTexture(learn_icon);
+    UnloadTexture(settings_icon);
 }
 
 // =================================================================================================

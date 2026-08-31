@@ -31,6 +31,7 @@ extern Font font;
 inline Texture2D null_txt;
 inline Texture2D projects_icon;
 inline Texture2D learn_icon;
+inline Texture2D settings_icon;
 
 typedef void (*ButtonAction)(void);
 
