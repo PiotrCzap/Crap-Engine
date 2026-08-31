@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include <stdio.h>
 #include <sys/resource.h>
+#include "imgui.h"
 
 // =================================================================================================
 // Zmienne

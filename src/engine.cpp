@@ -6,10 +6,10 @@ const char* ENGINE_NAME = "Moon Engine\0";
 const char* ENGINE_VERSION = "Version: 0.0.1\0";
 int FPS = 60;
 
-Color LIGHT_GRAY_COLOR = { 60, 60, 60, 255 };
-Color GRAY_COLOR = { 50, 50, 50, 255 };
-Color DARK_GRAY_COLOR = { 40, 40, 40, 255 };
-Color DARKER_GRAY_COLOR = { 30, 30, 30, 255 };
+Color LIGHT_GRAY_COLOR = { 60u, 60u, 60u, 255u };
+Color GRAY_COLOR = { 50u, 50u, 50u, 255u };
+Color DARK_GRAY_COLOR = { 40u, 40u, 40u, 255u };
+Color DARKER_GRAY_COLOR = { 30u, 30u, 30u, 255u };
 
 Font font;
 
