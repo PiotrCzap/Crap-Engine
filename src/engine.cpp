@@ -60,6 +60,32 @@ void Engine_button(ButtonAction action, const char text[], const float pos_x, co
 // Funkcje z Teksturami
 // =================================================================================================
 
+void Engine_button_with_texture(ButtonAction action, const Texture2D texture, const float pos_x, const float pos_y, const float size_x, const float size_y, const float rotation, Color color)
+{
+    Vector2 mouse_pos = GetMousePosition();
+    Rectangle button = { pos_x, pos_y, size_x, size_y }; // Użyj przekazanych pozycji i rozmiarów!
+    
+    Color button_color_normal = LIGHT_GRAY_COLOR;
+    Color button_color_hovered = GRAY_COLOR;
+    Color button_color_clicked = DARKER_GRAY_COLOR;
+    Color button_current_color = button_color_normal;
+
+    if (CheckCollisionPointRec(mouse_pos, button))
+    {
+        button_current_color = button_color_hovered;
+
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+        {
+            button_current_color = button_color_clicked;
+            if (action != nullptr) 
+                action();
+        }
+    }
+    
+    //DrawRectangleRec(button, button_current_color);
+    Engine_draw_rectangle_shape_with_texture(texture, pos_x, pos_y, size_x, size_y, rotation, color);
+}
+
 void Engine_texture_loader(void)
 {
     null_txt = LoadTexture("src/Engine Data/null.png");

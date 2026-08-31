@@ -45,8 +45,8 @@ void Engine_draw_text(const char text[], const float pos_x, const float pos_y, c
 void Engine_draw_text_better(const Font font, const char text[], const Vector2 text_position, const Vector2 text_origin, const float rotation, const float font_size, const float spacing, const Color color);
 void Engine_draw_rectangle_shape_with_texture(const Texture2D texture, const float pos_x, const float pos_y, const float size_x, const float size_y, float rotation, const Color color);
 void Engine_button(ButtonAction action, const char text[], const float pos_x, const float pos_y, const float text_pos_x, const float text_pos_y, const float size_x, const float size_y);
-void print_fps(void);
-
+void Engine_button_with_texture(ButtonAction action, const Texture2D texture, const float pos_x, const float pos_y, const float size_x, const float size_y, const float rotation, Color color);
+void print_fps();
 void Projects_tab();
 void Project_window(void);
 
