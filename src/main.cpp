@@ -1,6 +1,5 @@
 #include "main.hpp"
 
-
 // =================================================================================================
 // FUNKCJA GŁÓWNA
 // =================================================================================================
@@ -15,7 +14,7 @@ int main(void)
     font = LoadFont("src/Engine Data/fonts/Super Jello.ttf");
     SetWindowIcon(window_icon);
     SetTargetFPS(FPS);
-    Engine_texture_loader();
+    Engine_resource_loader();
     
 
 while (!WindowShouldClose())
@@ -38,7 +37,6 @@ while (!WindowShouldClose())
         EndDrawing();
     }
     UnloadImage(window_icon);
-    Engine_texture_unloader();
-    UnloadFont(font);
+    Engine_resource_unloader();
     CloseWindow();
 }

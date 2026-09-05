@@ -9,7 +9,7 @@ BUILD_DIR = build
 # Szukamy plików z rozszerzeniem .cpp zamiast .c
 SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
-TARGET = $(BUILD_DIR)/Crap-Engine
+TARGET = $(BUILD_DIR)/Moon-Engine
 
 all: $(TARGET)
 

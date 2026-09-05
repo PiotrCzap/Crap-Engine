@@ -18,6 +18,7 @@ void Settings_window()
 }
 
 
+
 void Project_window(void)
 {
     Engine_draw_rectangle_shape(0.0f, 0.0f, 800.0f, 600.0f, GRAY_COLOR);
@@ -42,7 +43,7 @@ void Project_window(void)
     {
         Engine_draw_rectangle_shape(250.0f, 0.0f, 800.0f, 600.0f, DARKER_GRAY_COLOR);
         Engine_draw_text_better(font, "PROJECTS", (Vector2){260.0f, 10.0f}, (Vector2){0.0f, 0.0f}, 0.0f, 32.0f, 2.0f, WHITE);
-        Engine_button(Learn_tab, "NEW PROJECT", 580.0f, 10.0f, 591.5f, 20.0f, 200.0f, 40.0f);
+        Engine_button(Learn_tab, "NEW PROJECT", 570.0f, 10.0f, 591.5f, 20.0f, 200.0f, 40.0f);
     }
 
     // Learn Tab
@@ -52,10 +53,13 @@ void Project_window(void)
         Engine_draw_rectangle_shape(250.0f, 0.0f, 800.0f, 600.0f, DARKER_GRAY_COLOR);
         Engine_draw_text_better(font, "LEARN", (Vector2){260.0f, 10.0f}, (Vector2){0.0f, 0.0f}, 0.0f, 32.0f, 2.0f, WHITE);
     }
+
+    // Settings Tab
     
     if (tabs == 3)
     {
         Engine_draw_rectangle_shape(250.0f, 0.0f, 800.0f, 600.0f, DARKER_GRAY_COLOR);
         Engine_draw_text_better(font, "SETTINGS", (Vector2){260.0f, 10.0f}, (Vector2){0.0f, 0.0f}, 0.0f, 32.0f, 2.0f, WHITE);
+        Engine_draw_text_better(font, "FONT", (Vector2){300.0f, 50.0f}, (Vector2){0.0f, 0.0f}, 0.0f, 32.0f, 2.0f, WHITE);
     }
 }

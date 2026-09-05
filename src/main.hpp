@@ -18,13 +18,14 @@ extern int FPS;
 
 // colors
 
-extern Color LIGHT_GRAY_COLOR;
-extern Color GRAY_COLOR;
-extern Color DARK_GRAY_COLOR;
-extern Color DARKER_GRAY_COLOR;
+extern const Color LIGHT_GRAY_COLOR;
+extern const Color GRAY_COLOR;
+extern const Color DARK_GRAY_COLOR;
+extern const Color DARKER_GRAY_COLOR;
 
 // fonts
 
+extern int font_selected;
 extern Font font;
 
 // textures
@@ -36,18 +37,31 @@ inline Texture2D settings_icon;
 
 typedef void (*ButtonAction)(void);
 
+// Engine draw functions
 
-void Engine_texture_loader(void);
-void Engine_texture_unloader(void);
 void Engine_draw_rectangle_shape(const float pos_x, const float pos_y, const float size_x, const float size_y, const Color color);
 void Engine_draw_circle_shape(const float pos_x, const float pos_y, const float radius, const Color color);
 void Engine_draw_ellipse_shape(const float pos_x, const float pos_y, const float radius_x, const float radius_y, const Color color);
+void Engine_draw_rectangle_shape_with_texture(const Texture2D texture, const float pos_x, const float pos_y, const float size_x, const float size_y, float rotation, const Color color);
 void Engine_draw_text(const char text[], const float pos_x, const float pos_y, const float font_size, const Color color);
 void Engine_draw_text_better(const Font font, const char text[], const Vector2 text_position, const Vector2 text_origin, const float rotation, const float font_size, const float spacing, const Color color);
-void Engine_draw_rectangle_shape_with_texture(const Texture2D texture, const float pos_x, const float pos_y, const float size_x, const float size_y, float rotation, const Color color);
+
+// Engine loader/unloader functions
+
+void Engine_resource_loader(void);
+void Engine_resource_unloader(void);
+
+// Engine buttons functions
+
 void Engine_button(ButtonAction action, const char text[], const float pos_x, const float pos_y, const float text_pos_x, const float text_pos_y, const float size_x, const float size_y);
 void Engine_button_with_texture(ButtonAction action, const Texture2D texture, const float pos_x, const float pos_y, const float size_x, const float size_y, const float rotation, Color color);
+
+// console debug functions
+
 void print_fps();
+
+// hub functions
+
 void Projects_tab();
 void Project_window(void);
 

@@ -6,104 +6,49 @@ const char* ENGINE_NAME = "Moon Engine\0";
 const char* ENGINE_VERSION = "Version: 0.0.1\0";
 int FPS = 60;
 
-Color LIGHT_GRAY_COLOR = { 60u, 60u, 60u, 255u };
-Color GRAY_COLOR = { 50u, 50u, 50u, 255u };
-Color DARK_GRAY_COLOR = { 40u, 40u, 40u, 255u };
-Color DARKER_GRAY_COLOR = { 30u, 30u, 30u, 255u };
+const Color LIGHT_GRAY_COLOR = { 60u, 60u, 60u, 255u };
+const Color GRAY_COLOR = { 50u, 50u, 50u, 255u };
+const Color DARK_GRAY_COLOR = { 40u, 40u, 40u, 255u };
+const Color DARKER_GRAY_COLOR = { 30u, 30u, 30u, 255u };
 
+int font_selected;
 Font font;
 
 struct GameObject player;
 struct GameObject test_text;
 
-// FUNKCJA RYSUJĄCA TEKSTURE
-/**
- * @brief PARAMETRY FUNKCJI "Engine_button"
- * @param action akcja wywoływana przez przycisk
- * @param text tekst na przycisku
- * @param pos_x pozycja tekstury w osi x
- * @param pos_y pozycja tekstury w osi y
- * @param text_pos_x pozycja tekstu w osi x
- * @param text_pos_y pozycja tekstu w osi y
- * @param size_x wielkość tekstury w osi x
- * @param size_y wielkość tekstury w osi y
- * @param rotation obrót tekstury
- * @param color kolor tekstury
- */
-void Engine_button(ButtonAction action, const char text[], const float pos_x, const float pos_y, const float text_pos_x, const float text_pos_y, const float size_x, const float size_y)
+// FUNKCJA PRINTUJĄCA FPSY W KONSOLI
+void print_fps(void)
 {
-    Vector2 mouse_pos = GetMousePosition();
-    Rectangle button = { pos_x, pos_y, size_x, size_y }; // Użyj przekazanych pozycji i rozmiarów!
-    
-    Color button_color_normal = LIGHT_GRAY_COLOR;
-    Color button_color_hovered = GRAY_COLOR;
-    Color button_color_clicked = DARKER_GRAY_COLOR;
-    Color button_current_color = button_color_normal;
-
-    if (CheckCollisionPointRec(mouse_pos, button))
-    {
-        button_current_color = button_color_hovered;
-
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
-        {
-            button_current_color = button_color_clicked;
-            if (action != nullptr) 
-                action();
-        }
-    }
-    
-    DrawRectangleRec(button, button_current_color);
-    Engine_draw_text_better(font, text, (Vector2){text_pos_x, text_pos_y}, (Vector2){0.0f, 0.0f}, 0.0f, 24.0f, 2.0f, WHITE);
+    printf("FPS: %d\n", GetFPS());
 }
 
-// =================================================================================================
-// Funkcje z Teksturami
-// =================================================================================================
-
-void Engine_button_with_texture(ButtonAction action, const Texture2D texture, const float pos_x, const float pos_y, const float size_x, const float size_y, const float rotation, Color color)
+void Engine_resource_loader(void)
 {
-    Vector2 mouse_pos = GetMousePosition();
-    Rectangle button = { pos_x, pos_y, size_x, size_y }; // Użyj przekazanych pozycji i rozmiarów!
-    
-    Color button_color_normal = LIGHT_GRAY_COLOR;
-    Color button_color_hovered = GRAY_COLOR;
-    Color button_color_clicked = DARKER_GRAY_COLOR;
-    Color button_current_color = button_color_normal;
-
-    if (CheckCollisionPointRec(mouse_pos, button))
-    {
-        button_current_color = button_color_hovered;
-
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
-        {
-            button_current_color = button_color_clicked;
-            if (action != nullptr) 
-                action();
-        }
-    }
-    
-    //DrawRectangleRec(button, button_current_color);
-    Engine_draw_rectangle_shape_with_texture(texture, pos_x, pos_y, size_x, size_y, rotation, color);
-}
-
-void Engine_texture_loader(void)
-{
+    // textures
     null_txt = LoadTexture("src/Engine Data/null.png");
     projects_icon = LoadTexture("src/Engine Data/projects icon.png");
     learn_icon = LoadTexture("src/Engine Data/learn icon.png");
     settings_icon = LoadTexture("src/Engine Data/Settings.png");
+
+    // fonts
+    //font = LoadFont("src/Engine Data/fonts/Super Jello.ttf");
+    //font = LoadFont("src/Engine Data/fonts/SoundWave-Regular.ttf");
+    //font = LoadFont("src/Engine Data/fonts/Now Breaks DEMO VERSION.ttf");
 }
-void Engine_texture_unloader(void)
+
+void Engine_resource_unloader(void)
 {
     UnloadTexture(null_txt);
     UnloadTexture(projects_icon);
     UnloadTexture(learn_icon);
     UnloadTexture(settings_icon);
+    return UnloadFont(font);
 }
 
-// =================================================================================================
-// Standardowe Funkcje
-// =================================================================================================
+// ==================================================
+// DRAW FUNCTIONS
+// ==================================================
 
 // FUNKCJA RYSUJĄCA KWADRAT/PROSTOKĄT
 /**
@@ -146,6 +91,25 @@ void Engine_draw_ellipse_shape(const float pos_x, const float pos_y, const float
     DrawEllipse(pos_x, pos_y, radius_x, radius_y, color);
 }
 
+// FUNKCJA RYSUJĄCA TEKSTURE
+/**
+ * @brief PARAMETRY FUNKCJI "Engine_draw_rectangle_shape_with_texture"
+ * @param texture tekstura
+ * @param pos_x pozycja tekstury w osi x
+ * @param pos_y pozycja tekstury w osi y
+ * @param size_x wielkość tekstury w osi x
+ * @param size_y wielkość tekstury w osi y
+ * @param rotation obrót tekstury
+ * @param color kolor tekstury
+ */
+void Engine_draw_rectangle_shape_with_texture(const Texture2D texture, const float pos_x, const float pos_y, const float size_x, const float size_y, float rotation, const Color color)
+{
+    Rectangle sourceRec = { 0.0f, 0.0f, (float)texture.width, (float)texture.height };
+    Rectangle destRec = { pos_x, pos_y, size_x, size_y };
+    Vector2 origin = { 0.0f, 0.0f };
+    DrawTexturePro(texture, sourceRec, destRec, origin, rotation, color);
+}
+
 // FUNKCJA RYSUJĄCA TEKST
 /**
  * @brief PARAMETRY FUNKCJI "draw text"
@@ -177,28 +141,66 @@ void Engine_draw_text_better(const Font font, const char text[], const Vector2 t
     DrawTextPro(font, text, text_position, text_origin, rotation, font_size, spacing, color);
 }
 
-
 // FUNKCJA RYSUJĄCA TEKSTURE
 /**
- * @brief PARAMETRY FUNKCJI "Engine_draw_rectangle_shape_with_texture"
- * @param texture tekstura
+ * @brief PARAMETRY FUNKCJI "Engine_button"
+ * @param action akcja wywoływana przez przycisk
+ * @param text tekst na przycisku
  * @param pos_x pozycja tekstury w osi x
  * @param pos_y pozycja tekstury w osi y
+ * @param text_pos_x pozycja tekstu w osi x
+ * @param text_pos_y pozycja tekstu w osi y
  * @param size_x wielkość tekstury w osi x
  * @param size_y wielkość tekstury w osi y
  * @param rotation obrót tekstury
  * @param color kolor tekstury
  */
-void Engine_draw_rectangle_shape_with_texture(const Texture2D texture, const float pos_x, const float pos_y, const float size_x, const float size_y, float rotation, const Color color)
+void Engine_button(ButtonAction action, const char text[], const float pos_x, const float pos_y, const float text_pos_x, const float text_pos_y, const float size_x, const float size_y)
 {
-    Rectangle sourceRec = { 0.0f, 0.0f, (float)texture.width, (float)texture.height };
-    Rectangle destRec = { pos_x, pos_y, size_x, size_y };
-    Vector2 origin = { 0.0f, 0.0f };
-    DrawTexturePro(texture, sourceRec, destRec, origin, rotation, color);
+    Vector2 mouse_pos = GetMousePosition();
+    Rectangle button = { pos_x, pos_y, size_x, size_y }; // Użyj przekazanych pozycji i rozmiarów!
+    
+    Color button_color_normal = LIGHT_GRAY_COLOR;
+    Color button_color_hovered = GRAY_COLOR;
+    Color button_color_clicked = DARKER_GRAY_COLOR;
+    Color button_current_color = button_color_normal;
+
+    if (CheckCollisionPointRec(mouse_pos, button))
+    {
+        button_current_color = button_color_hovered;
+
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+        {
+            button_current_color = button_color_clicked;
+            if (action != nullptr) 
+                action();
+        }
+    }
+    
+    DrawRectangleRec(button, button_current_color);
+    Engine_draw_text_better(font, text, (Vector2){text_pos_x, text_pos_y}, (Vector2){0.0f, 0.0f}, 0.0f, 24.0f, 2.0f, WHITE);
 }
 
-// FUNKCJA PRINTUJĄCA FPSY W KONSOLI
-void print_fps(void)
+void Engine_button_with_texture(ButtonAction action, const Texture2D texture, const float pos_x, const float pos_y, const float size_x, const float size_y, const float rotation, Color color)
 {
-    printf("FPS: %d\n", GetFPS());
+    Vector2 mouse_pos = GetMousePosition();
+    Rectangle button = { pos_x, pos_y, size_x, size_y }; // Użyj przekazanych pozycji i rozmiarów!
+    
+    Color button_color_normal = LIGHT_GRAY_COLOR;
+    Color button_color_hovered = GRAY_COLOR;
+    Color button_color_clicked = DARKER_GRAY_COLOR;
+    Color button_current_color = button_color_normal;
+
+    if (CheckCollisionPointRec(mouse_pos, button))
+    {
+        button_current_color = button_color_hovered;
+
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+        {
+            button_current_color = button_color_clicked;
+            if (action != nullptr) 
+                action();
+        }
+    }
+    Engine_draw_rectangle_shape_with_texture(texture, pos_x, pos_y, size_x, size_y, rotation, color);
 }
